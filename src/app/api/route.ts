@@ -1,13 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import path from "path";
 import fs from "fs";
 import { parse } from "csv-parse";
+import { getAbsoluteFilePath } from "../../../utils/util";
 
-export const getAbsoluteFilePath = (filePath: string) => {
-    return path.join(process.cwd(), "public", filePath);
-}
-
-export const getData = (): Promise<[string, string][]> => {
+const getData = (): Promise<[string, string][]> => {
     return new Promise((resolve, reject) => {
         const records: [string, string][] = [];
 

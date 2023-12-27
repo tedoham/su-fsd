@@ -1,3 +1,5 @@
+import path from "path";
+
 export const compareFilenames = (a: string, b: string) => {
     const numPattern = /\d+/g;
     const aMatch = a.match(numPattern);
@@ -13,6 +15,11 @@ export const compareFilenames = (a: string, b: string) => {
     // If only one filename has a number or if numbers are equal, compare as strings
     return a.localeCompare(b, undefined, { numeric: true });
 };
+
+
+export const getAbsoluteFilePath = (filePath: string) => {
+    return path.join(process.cwd(), "public", filePath);
+}
 
 export const sortedItems = [
     { name: "createdAt", title: "Sort by created at" },
