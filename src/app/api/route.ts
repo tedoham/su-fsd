@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
 import { parse } from "csv-parse";
 import { getAbsoluteFilePath } from "../../../utils/util";
+import { NextRequest, NextResponse } from "next/server";
 
 const getData = (): Promise<[string, string][]> => {
     return new Promise((resolve, reject) => {
@@ -21,11 +22,11 @@ const getData = (): Promise<[string, string][]> => {
     });
 }
 
-export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
+export const GET = async (req: NextRequest, res: NextResponse) => {
     try {
         const data = await getData();
         return new Response(JSON.stringify({data: data}));
     } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" });
+        console.log(error);
     }
 }
